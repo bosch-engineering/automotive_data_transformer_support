@@ -1,2 +1,2 @@
-# automotive_data_transformer_documentation
-Documentation/Getting Started for the Automotive Data Transformer
+# automotive_data_transformer_support
+Documentation/Getting Started/Support for the Automotive Data Transformer
