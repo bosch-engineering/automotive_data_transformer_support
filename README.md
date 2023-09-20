@@ -58,4 +58,16 @@ https://cognito-idp.eu-central-1.amazonaws.com/
 
 After the password is changed you need to generate a new ID Token again as the old one is invalid.
 
+### Create Cross-Account Role to grant ADT Access to your S3 Bucket
+
+1. Download a CloudFormation Template for the cross-account role.
+2. Create a new CloudFormation Stack:
+   ![image](https://github.com/bosch-engineering/automotive_data_transformer_support/assets/91074947/15dde2e8-b4bf-45d6-a2dc-cdc533db700d)
+
+3.![image](https://github.com/bosch-engineering/automotive_data_transformer_support/assets/91074947/558bb8c2-687a-4c69-8e5f-6101a3369c7d)
+
+4. Build the stack. User created Cross-Account Role in your requests to ADT.
+
+
+
 
