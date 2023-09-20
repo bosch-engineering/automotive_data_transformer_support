@@ -1,0 +1,124 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "MasterAccountNumber": {
+      "Description": "The account ID of ADT",
+      "Type": "Number"
+    },
+    "CrossAccountRoleName": {
+      "Description": "Your Role Name (ex: OrganizationAccountAccessRole)",
+      "Type": "String"
+    },
+    "S3Bucket": {
+      "Description": "Name of the S3 Bucket that will be accessed by ADT",
+      "Type": "String"
+    },
+    "ExternalId": {
+      "Description": "External ID granted to the ADT",
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "S3AccessCrossAccountRole": {
+      "Type": "AWS::IAM::Role",
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
+              "id": "W28",
+              "reason": "The role name needs to be same in all of the member accounts."
+            }
+          ]
+        }
+      },
+      "Properties": {
+        "RoleName": {
+          "Ref": "CrossAccountRoleName"
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:iam::",
+                      {
+                        "Ref": "MasterAccountNumber"
+                      },
+                      ":root"
+                    ]
+                  ]
+                }
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ],
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": {
+                    "Ref": "ExternalId"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ReadAccessToS3Bucket",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:ListAllMyBuckets"
+                  ],
+                  "Resource": "arn:aws:s3:::*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:PutObject",
+                    "s3:ListBucket",
+                    "s3:GetLifecycleConfiguration"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:aws:s3:::",
+                          {
+                            "Ref": "S3Bucket"
+                          }
+                        ]
+                      ]
+                    },
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:aws:s3:::",
+                          {
+                            "Ref": "S3Bucket"
+                          },
+                          "/*"
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
