@@ -4,6 +4,12 @@ Documentation/Getting Started/Support for the Automotive Data Transformer
 ## How to get access to ADT?
 
 Contact Tim Sibold tim.sibold@de.bosch.com if you have interest in ADT and would like to get access for a free trial. You will recieve a welcome Email with you credentials and other necessary info.
+
+## What are prerequisites for using ADT?
+
+* You have registered and recieved a CustomerID, ExtrenalID, ClientID and your Login Credebtials
+* You have created a Cross-Account Role to grant ADT access to your S3 bucket
+
       
 ## What to do once you got your credentials?
 
@@ -67,6 +73,16 @@ After the password is changed you need to generate a new ID Token again as the o
 3.![image](https://github.com/bosch-engineering/automotive_data_transformer_support/assets/91074947/558bb8c2-687a-4c69-8e5f-6101a3369c7d)
 
 4. Build the stack. User created Cross-Account Role in your requests to ADT.
+
+## Postman Collection
+
+You can find examples of possible requests here: https://documenter.getpostman.com/view/10945379/2s9XxztC6V#intro
+
+## Troubleshooting
+
+* If you get Error 407 (Error: tunneling socket could not be established, statusCode=407), check your proxy settings.
+* If you get "Unauthorized" error, make sure that your Token is valid. IdToken is valid 24 hours only!
+* If you get "Internal Server Error", double check attributes in your request. If everything looks correct, contact our support team by sending an Email to Tim Sibold tim.sibold@de.bosch.com.
 
 
 
