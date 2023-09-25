@@ -1,0 +1,974 @@
+{
+	"info": {
+		"_postman_id": "d6148eaa-4c09-47aa-8f8b-45d5567237a7",
+		"name": "Automotive Data Transformer V1.0",
+		"description": "This is the rest web API for Automotive Data Transformer (ADT) for Beta Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Metadata",
+			"item": [
+				{
+					"name": "Export metadata as file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"meta\",\n    \"return_type\": \"filepath\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export metadata  as REST response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\"\n    \"action\": \"meta\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export channel lists as file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"channel_list\",\n    \"return_type\": \"filepath\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export channel list as REST response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"channel_list\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Output Format",
+			"item": [
+				{
+					"name": "CSV",
+					"item": [
+						{
+							"name": "Export CSV all signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"csv\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"export_all_signals\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export CSV one signal",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"csv\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export CSV multiple signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"csv\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Parquet",
+					"item": [
+						{
+							"name": "Export parquet all signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"export_all_signals\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export parquet one signal",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export parquet multiple signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "JSON",
+					"item": [
+						{
+							"name": "Export JSON all signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"export_all_signals\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export JSON one signal",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export JSON multiple signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REST",
+					"item": [
+						{
+							"name": "Export one signal  as REST response",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export multiple signals as REST response",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Export Parameters",
+			"item": [
+				{
+					"name": "Export one signal with outputname",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ],\n    \"outputname\": \"<output_name>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export one signal with output_path",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal name for exporting>\"\n    ],\n    \"output_path\": \"<output_path>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export multiple signals with output_path",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ],\n    \"output_path\": \"<output_path>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export multiple signals with output_path and prefix",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"format\": \"parquet\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ],\n    \"output_path\": \"<output_path>\",\n    \"output_name_prefix\": \"PREFIX_\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance}}",
+							"host": [
+								"{{instance}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resampling",
+			"item": [
+				{
+					"name": "With cut timestamp",
+					"item": [
+						{
+							"name": "Resampling and exporting all signals as file",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"export_all_signals\": true,\n    \"resample\": 1000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resampling multiple signals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"resample\": 1000,\n    \"signal\": [\n        \"<signal1 name for exporting>\",\n        \"<signal2 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resampling one signal",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"resample\": 1000,\n    \"signal\": [\n        \"<signal1 name for exporting>\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resampling signal with time cut",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"assume_role\": \"{{assume_role}}\",\n    \"session_name\": \"{{session_name}}\",\n    \"external_id\": \"{{external_id}}\",\n    \"action\": \"export\",\n    \"return_type\": \"json\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<directory/example_file.mf4>\",\n    \"resample\": 1000,\n    \"signal\": [\n        \"<signal1 name for exporting>\"\n    ],\n    \"cut_start\": 5.0,\n    \"cut_end\": 10.0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance}}",
+									"host": [
+										"{{instance}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get token (IdToken)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AuthParameters\": {\r\n        \"USERNAME\": \"{{USERNAME}}\",\r\n        \"PASSWORD\": \"{{PASSWORD}}\"\r\n    },\r\n    \"AuthFlow\": \"USER_PASSWORD_AUTH\",\r\n    \"ClientId\": \"{{ClientId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.eu-central-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{id_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "instance",
+			"value": "https://api.automotive-data-transformer.com/v1"
+		},
+		{
+			"key": "assume_role",
+			"value": "<ARN of the created cross account role>",
+			"type": "string"
+		},
+		{
+			"key": "session_name",
+			"value": "<random session name>",
+			"type": "string"
+		},
+		{
+			"key": "external_id",
+			"value": "<External id in the onboarding email>",
+			"type": "string"
+		},
+		{
+			"key": "USERNAME",
+			"value": "<your email address as ADT user name>",
+			"type": "string"
+		},
+		{
+			"key": "PASSWORD",
+			"value": "<your password>",
+			"type": "string"
+		},
+		{
+			"key": "ClientId",
+			"value": "<client id in the onboarding email>",
+			"type": "string"
+		},
+		{
+			"key": "id_token",
+			"value": "<ID Token>",
+			"type": "string"
+		}
+	]
+}
