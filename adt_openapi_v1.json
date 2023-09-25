@@ -1,0 +1,272 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "Automotive Data Transformer",
+    "description": "Unlock the potential of your MDF files by processing them with our new cloud-based microservice.",
+    "termsOfService": "https://www.bosch-engineering.com/de/terms-of-use-1.html",
+    "contact": {
+      "name": "Bosch Engineering GmbH",
+      "url": "https://www.bosch-engineering.com",
+      "email": "automotive-data-transformer@bosch.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.automotive-data-transformer.com/v1"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "mdf"
+        ],
+        "summary": "Parse MDF File",
+        "description": "The first and fastest cloud-based MDF converter. Meta data extraction and conversion of all relevant automotive measurement file formats, to enable cloud-based analytics, simulation and ML.",
+        "operationId": "post-adtv1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ParserOptions"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ParserS3Options"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LambdaResponseObject"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "ID Token": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://api.automotive-data-transformer.com/v1"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "mdf"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ID Token": {
+        "type": "apiKey",
+        "description": "ID Token for using the API",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "responses": {
+      "ChannelList": {
+        "description": "The response from the metadata query, which only returns the channel list.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "description": "The response from the metadata query, which only returns the channel list.",
+              "items": {
+                "type": "string"
+              },
+              "x-examples": {
+                "Example 1": [
+                  "0:1:Signal_ABC",
+                  "0:2:Signal_DEF",
+                  "0:3:Signal_XYZ"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "LambdaResponseObject": {
+        "description": "Response object from the lambda function. This will be deprecated. The new response format will be implemented.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ParserOptions": {
+        "type": "object",
+        "title": "ParserOptions",
+        "description": "The parser options define how you want to parse your MDF file. ",
+        "properties": {
+          "action": {
+            "enum": [
+              "channel_list",
+              "meta",
+              "meta_all",
+              "export"
+            ],
+            "description": "`action` defines the operation mode of the mdf parser. The possible values of the `action` option are: \n* `channel_list`\n* `meta`\n* `meta_all`\n* `export`\n\n## More on the `action`\nThe MDF parser can do two things currently:\n\n1. metadata parsing\n2. signals parsing\n\n### Metadata parsing\n* use `channel_list` to only get the channel names.\n* use `meta` to get the most used metadata, not all the data.\n* use `meta_all` to get all metadata.\n\n### Signal parsing\n* use `export` to parse the signals.",
+            "default": "meta"
+          },
+          "format": {
+            "enum": [
+              "csv",
+              "parquet"
+            ],
+            "description": "Define the wished output format. Available options are:\n* `csv`, write the extracted signal as CSV format in the target location\n* `parquet`, write the extracted signals as parquet format in the target location\n* `json`, write the extracted signals as JSON format in the target location",
+            "default": "parquet"
+          },
+          "signal": {
+            "type": "array",
+            "description": "You can extract one signal, multiple signals or all signals. With the `signal` option, you can define which signals you want to extract. `signal` is an array of the MDF channel names. You can get the channel names by using the `channel_list` action.\n\nIf you want to extract only one signal, just leave one item in the array. If you don't define this option, no signals will be extracted.\n\nMaximal array size of `signal` is 250. ",
+            "items": {
+              "type": "string",
+              "example": "signal1"
+            }
+          },
+          "return_type": {
+            "enum": [
+              "filepath",
+              "json"
+            ],
+            "description": "This option controls the return type of the metadata parsing response. It has two options:\n\n* `filepath`\n* `json`\n\n `filepath` will return the path of the written output files in the response. \n \n `json` will return the content as JSON response without written to any files. The parameter `format` will be ignored.",
+            "default": "filepath"
+          },
+          "resample": {
+            "type": "integer",
+            "description": "With `resample` option, you can resample all the channels to the given sampling time in milliseconds. The handling of the missing values can be configured with `integer_interpolation` and `float_interpolation` options.\n\nIf `resample` option is set, the `signal` option will be ignored, since all the signals will be resampled to the specified sampling time."
+          },
+          "integer_interpolation": {
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "description": "Interpolation method for the integer channels.\n\n0: repeat the previous sample.\n1: use the linear interpolation.\n2: hybrid interpolation. ",
+            "default": 0
+          },
+          "float_interpolation": {
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Interplolation method for the float channels.\n\n0: repeat the previous sample\n1: use the linear interpolation",
+            "default": 1
+          },
+          "cut_start": {
+            "type": "number",
+            "description": "Start timestamp to cut the export signal. Start and stop limits are absolute values or values relative to the first timestamp depending on the whence argument.",
+            "format": "float"
+          },
+          "cut_end": {
+            "type": "number",
+            "description": "Stop timestamp to cut the export file.",
+            "format": "float"
+          },
+          "cut_whence": {
+            "enum": [
+              0,
+              1
+            ],
+            "description": "How to search for the start and stop values.\n0: (default) absolute\n1: relative to first timestamp",
+            "default": 0
+          },
+          "compress": {
+            "type": "boolean",
+            "description": "Enables Snappy compression if parquet is exported. ",
+            "default": true
+          },
+          "export_all_signals": {
+            "type": "boolean",
+            "description": "Flag to export all signals. ",
+            "default": false
+          },
+          "spawn": {
+            "type": "boolean",
+            "description": "Default to `true` for using the concurrent parsing mechanism. Only Valid for 'action': 'export'. \n",
+            "default": true
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "ParserS3Options": {
+        "type": "object",
+        "title": "ParserS3Options",
+        "description": "Parse the MDF files in your S3 bucket.",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "The name of the MDF file. You can also include the prefixes."
+          },
+          "input_bucket": {
+            "type": "string",
+            "description": "The bucket name that contains your MDF file."
+          },
+          "output_bucket": {
+            "type": "string",
+            "description": "Define the output bucket to write the export. Without this option, the export will be saved into the `input_bucket` too."
+          },
+          "assume_role": {
+            "type": "string",
+            "description": "The Amazon Resource Name (ARN) of the role to assume."
+          },
+          "session_name": {
+            "type": "string",
+            "description": "An identifier for the assumed role session.\n\nUse the role session name to uniquely identify a session when the same role is assumed by different principals or for different reasons. In cross-account scenarios, the role session name is visible to, and can be logged by the account that owns the role. The role session name is also used in the ARN of the assumed role principal. This means that subsequent cross-account API requests that use the temporary security credentials will expose the role session name to the external account in their CloudTrail logs."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Define an output path for the results. "
+          },
+          "output_name_prefix": {
+            "type": "string",
+            "description": "Add an additional file prefix to the file_stem of the output file. It's useful if you want to export mulitple MDF files into one `output_path`."
+          },
+          "external_id": {
+            "type": "string",
+            "description": "An external ID for the cross account role access."
+          }
+        },
+        "required": [
+          "filename",
+          "input_bucket",
+          "assume_role",
+          "session_name"
+        ],
+        "x-examples": {
+          "Use S3 credentials with MDF Parser": {
+            "filename": "example_project_prefix/offroad.mf4",
+            "input_bucket": "example-project-bucket",
+            "output_bucket": "mdf-parser-output-bucket",
+            "aws_access_key_id": "s3_key_id",
+            "aws_access_key_secret": "s3_key_secret"
+          }
+        }
+      }
+    }
+  },
+  "x-internal": false
+}
