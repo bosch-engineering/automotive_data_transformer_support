@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "2561f472-7cc4-48a5-8c77-7757ffdf943b",
+		"name": "Automotive Data Transformer Quick Start",
+		"description": "Unlock the potential of your MDF files by processing them with our new cloud-based microservice.\n\nContact Support:\n Name: Bosch Engineering GmbH\n Email: automotive-data-transformer@bosch.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get ID Token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"AuthParameters\": {\n        \"USERNAME\": \"<your email address as ADT user name>\",\n        \"PASSWORD\": \"<your password>\"\n    },\n    \"AuthFlow\": \"USER_PASSWORD_AUTH\",\n    \"ClientId\": \"<client id in the onboarding email>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.eu-central-1.amazonaws.com/",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quick Start Get Channels",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"action\": \"channel_list\",\n    \"return_type\": \"json\",\n    \"assume_role\": \"<ARN of the created cross account role>\",\n    \"session_name\": \"<random session name>\",\n    \"external_id\": \"<External id in the onboarding email>\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"filename\": \"<the file name for parsing>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quick Start Export Signal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"action\": \"export\",\n    \"assume_role\": \"<ARN of the created cross account role>\",\n    \"session_name\": \"<random session name>\",\n    \"external_id\": \"<External id in the onboarding email>\",\n    \"input_bucket\": \"<the buckekt name for the input file>\",\n    \"output_bucket\": \"<the buckekt name for the output file>\",\n    \"filename\": \"<the input file name for parsing>\",\n    \"output_path\": \"<the output path>\",\n    \"signal\": [\n        \"<the signal name for parsing>\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_key}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.automotive-data-transformer.com/v1",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "GET_ID_TOKEN_AT_FIRST",
+			"type": "default"
+		}
+	]
+}
