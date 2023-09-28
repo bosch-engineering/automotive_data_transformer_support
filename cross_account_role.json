@@ -6,7 +6,7 @@
       "Type": "Number"
     },
     "CrossAccountRoleName": {
-      "Description": "Your Role Name (ex: OrganizationAccountAccessRole)",
+      "Description": "Your Role Name (ex: ADTAccountAccessRole)",
       "Type": "String"
     },
     "S3Bucket": {
