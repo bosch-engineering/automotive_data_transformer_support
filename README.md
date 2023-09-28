@@ -5,6 +5,8 @@ The Automotive Data Transformer is a cloud-native measurement data processor to 
 
 This is the Automotive Data Transformer Support Repository.
 
+<img width="2503" alt="image" src="https://github.com/bosch-engineering/automotive_data_transformer_support/assets/54136241/b761e00e-81ee-4e9a-bc24-bb84ef06e94d">
+
 ## Features
 * Extract metadata and convert measurement files from MDF to Parquet, CSV or JSON. 
 * Filter and convert only the relevant signals via adjustable signal export (single, multiple or all channels).​
