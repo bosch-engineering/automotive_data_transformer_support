@@ -1,0 +1,11 @@
+{
+  "assume_role": "<ARN of the created cross account role>",
+  "session_name": "<random session name>",
+  "external_id": "<External id in the onboarding email>",
+  "action": "export",
+  "input_bucket": "<the bucket name for the input file>",
+  "output_bucket": "<the bucket name for the output file>",
+  "filename": "<directory/example_file.mf4>",
+  "signal": ["<signal name for exporting>"],
+  "output_path": "output"
+}

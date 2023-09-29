@@ -1,0 +1,9 @@
+{
+  "assume_role": "<ARN of the created cross account role>",
+  "session_name": "<random session name>",
+  "external_id": "<External id in the onboarding email>",
+  "action": "channel_list",
+  "return_type": "json",
+  "input_bucket": "<the bucket name for the input file>",
+  "filename": "<directory/example_file.mf4>"
+}
