@@ -10,7 +10,7 @@
       "Type": "String"
     },
     "S3Bucket": {
-      "Description": "Name of the S3 Bucket that will be accessed by ADT",
+      "Description": "Name of the S3 Bucket with mf4 files that will be accessed by ADT",
       "Type": "String"
     },
     "ExternalId": {
