@@ -76,17 +76,9 @@
                 {
                   "Effect": "Allow",
                   "Action": [
-                    "s3:ListAllMyBuckets"
-                  ],
-                  "Resource": "arn:aws:s3:::*"
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
                     "s3:GetObject",
                     "s3:PutObject",
-                    "s3:ListBucket",
-                    "s3:GetLifecycleConfiguration"
+                    "s3:ListBucket"
                   ],
                   "Resource": [
                     {
