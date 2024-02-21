@@ -20,8 +20,8 @@ This is the Automotive Data Transformer Support Repository.
 * Data stays in your account and Automotive Data Transformer gets only access to your provided data.​
 * Trust in an internally applied, AWS-based/certified and continuously updated tool.​
   
-Know more about Automotive Data Transformer:
-http://automotive-data-transformer.com
+Know more about Automotive Data Transformer: <br>
+https://www.bosch-engineering.com/stories/stories-detailpages/automotive-data-transformer.html
 
 ## How to use Automotive Data Transformer
 Check out the [Automotive Data Transformer Wiki Page](https://github.com/bosch-engineering/automotive_data_transformer_support/wiki)
